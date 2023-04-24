@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Reserva {
 	private Integer id;
-	private LocalDate dateE;
+	private LocalDate dataE;
 	private LocalDate dataS;
 	private String valor;
 	private String formaPago;
@@ -13,9 +13,9 @@ public class Reserva {
 	public Reserva() {
 	}
 
-	public Reserva(Integer id, LocalDate dateE, LocalDate dataS, String valor, String formaPago) {
+	public Reserva(Integer id, LocalDate dataE, LocalDate dataS, String valor, String formaPago) {
 		this.id = id;
-		this.dateE = dateE;
+		this.dataE = dataE;
 		this.dataS = dataS;
 		this.valor = valor;
 		this.formaPago = formaPago;
@@ -29,12 +29,12 @@ public class Reserva {
 		this.id = id;
 	}
 
-	public LocalDate getDateE() {
-		return dateE;
+	public LocalDate getDataE() {
+		return dataE;
 	}
 
-	public void setDateE(LocalDate dateE) {
-		this.dateE = dateE;
+	public void setDateE(LocalDate dataE) {
+		this.dataE = dataE;
 	}
 
 	public LocalDate getDataS() {

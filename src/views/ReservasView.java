@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.text.Format;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -274,6 +275,7 @@ public class ReservasView extends JFrame {
 		txtFechaSalida.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				//Activa el evento, después del usuario seleccionar las fechas se debe calcular el valor de la reserva
+				calcularValor(txtFechaEntrada, txtFechaSalida);
 			}
 		});
 		txtFechaSalida.setDateFormatString("yyyy-MM-dd");
@@ -306,8 +308,7 @@ public class ReservasView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (ReservasView.txtFechaEntrada.getDate() != null && ReservasView.txtFechaSalida.getDate() != null) {		
-					RegistroHuesped registro = new RegistroHuesped();
-					registro.setVisible(true);
+					guardarReserva();
 				} else {
 					JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
 				}
@@ -321,17 +322,41 @@ public class ReservasView extends JFrame {
 	}
 	
 	private void guardarReserva() {
-		if(txtFechaE.getDate() != null && txtFechaS() != null && !txtValor.equals("") 
+		if(txtFechaEntrada.getDate() != null && txtFechaSalida != null && !txtValor.equals("") 
 				&& !txtFormaPago.getSelectedItem().toString().equals("")) {
-			LocalDate dataE = LocalDate.parse(((JTextField)txtFechaE.getDateEditor().getUiComponent()).getText());
-			LocalDate dataS = LocalDate.parse(((JTextField)txtFechaS.getDateEditor().getUiComponent()).getText());
-			Reserva reserva = new Reserva(dataE, dataS, txtValor.getText(), txtFormaPago.getSelectedItem().toString());
-			ReservaControl.guardar(reserva);
-			
-			RegistroHuesped registro = new RegistroHuesped();
+			LocalDate dataE = LocalDate.parse(((JTextField)txtFechaEntrada.getDateEditor().getUiComponent()).getText());
+			LocalDate dataS = LocalDate.parse(((JTextField)txtFechaSalida.getDateEditor().getUiComponent()).getText());
+			Reserva reserva = new Reserva (xMouse, dataE,dataS, txtValor.getText(), txtFormaPago.getSelectedItem().toString());
+			reservaControl.guardar(reserva);			
+			RegistroHuesped registro = new RegistroHuesped(reserva.getId());
 			registro.setVisible(true);
 			dispose();
+		}else {
+			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
 		}
+	}
+	
+	
+	public void calcularValor(JDateChooser dataE, JDateChooser dataS) {
+		if(dataE.getDate() != null && dataS.getDate() != null) {
+			if(dataE.getDate().after(dataS.getDate())) {
+				JOptionPane.showMessageDialog(null, "La fecha de Ingreso no puede ser posterior a la fecha de egreso",
+						"Error en fecha", JOptionPane.ERROR_MESSAGE);
+				return;
+			}			
+			Calendar inicio = dataE.getCalendar();
+			Calendar fin = dataS.getCalendar();
+			int dias = -1; // para que comience a contar desde el dia siguiente
+			int noche = 80;
+			int valor;
+			
+			while(inicio.before(fin) || inicio.equals(fin)) {
+				dias++;
+				inicio.add(Calendar.DATE, 1);
+			}
+			valor = dias *noche;
+			txtValor.setText("" + valor);
+		}		
 	}
 		
 	//Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	
