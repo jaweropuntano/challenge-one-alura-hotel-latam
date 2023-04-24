@@ -11,10 +11,15 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+
+import controladores.ReservaControlador;
+import modelo.Reserva;
+
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.text.Format;
+import java.time.LocalDate;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -38,6 +43,8 @@ public class ReservasView extends JFrame {
 	private JLabel labelExit;
 	private JLabel labelAtras;
 
+	private ReservaControlador reservaControl;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -59,6 +66,8 @@ public class ReservasView extends JFrame {
 	 */
 	public ReservasView() {
 		super("Reserva");
+		
+		this.reservaControl = new ReservaControlador();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ReservasView.class.getResource("/imagenes/aH-40px.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 560);
@@ -309,8 +318,20 @@ public class ReservasView extends JFrame {
 		btnsiguiente.setBounds(238, 493, 122, 35);
 		panel.add(btnsiguiente);
 		btnsiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-
+	}
+	
+	private void guardarReserva() {
+		if(txtFechaE.getDate() != null && txtFechaS() != null && !txtValor.equals("") 
+				&& !txtFormaPago.getSelectedItem().toString().equals("")) {
+			LocalDate dataE = LocalDate.parse(((JTextField)txtFechaE.getDateEditor().getUiComponent()).getText());
+			LocalDate dataS = LocalDate.parse(((JTextField)txtFechaS.getDateEditor().getUiComponent()).getText());
+			Reserva reserva = new Reserva(dataE, dataS, txtValor.getText(), txtFormaPago.getSelectedItem().toString());
+			ReservaControl.guardar(reserva);
+			
+			RegistroHuesped registro = new RegistroHuesped();
+			registro.setVisible(true);
+			dispose();
+		}
 	}
 		
 	//Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	
