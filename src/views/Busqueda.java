@@ -275,10 +275,11 @@ public class Busqueda extends JFrame {
 					ActualizarReservas();
 					limpiarTabla();
 					mostrarTablaReservas();
-					mostrarHuespedes();
+					MostrarTablaHuespedes();
 				}else if(filaHuespedes >= 0) {
 					ActualizarHuespedes();
-					mostrarHuespedes();
+					limpiarTabla();
+					MostrarTablaHuespedes();
 					mostrarTablaReservas();
 				}
 			}
@@ -295,6 +296,8 @@ public class Busqueda extends JFrame {
 		lblEditar.setFont(new Font("Roboto", Font.PLAIN, 18));
 		lblEditar.setBounds(0, 0, 122, 35);
 		btnEditar.add(lblEditar);
+		
+		// Eliminar
 		
 		JPanel btnEliminar = new JPanel();
 		btnEliminar.addMouseListener(new MouseAdapter() {
@@ -324,6 +327,8 @@ public class Busqueda extends JFrame {
 						mostrarHuespedes();
 						mostrarTablaReservas();
 					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Hubo un error al intentar eliminar");
 				}
 			}
 		});
@@ -395,9 +400,14 @@ public class Busqueda extends JFrame {
 			String nacionalidad = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 4);
 			String telefono = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 5);
 			Integer id_reserva = Integer.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 6).toString());
-			
-			this.huespedControl.actualizarH(nombre, apellido, fechaNacimiento, nacionalidad, telefono, id_reserva, id_reserva);
-			JOptionPane.showMessageDialog(this, String.format("Registro modificado Correctamente"));
+			Integer id = Integer.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0).toString());
+
+			if(tbHuespedes.getSelectedColumn() == 0 || tbHuespedes.getSelectedColumn() == 6) {
+				JOptionPane.showMessageDialog(this, "No se pueden modificar los Id");
+			}else {
+				this.huespedControl.actualizarH(nombre, apellido, fechaNacimiento, nacionalidad, telefono, id_reserva, id);
+				JOptionPane.showMessageDialog(this, String.format("Registro modificado Correctamente"));				
+			}			
 			
 		}, ()->JOptionPane.showInternalMessageDialog(this, "ATENCION: Dato ingresado de Forma Incorrecta"));
 	}
