@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,7 +19,6 @@ import modelo.Reserva;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import java.text.Format;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.awt.event.MouseAdapter;
@@ -357,6 +357,11 @@ public class ReservasView extends JFrame {
 			valor = dias *noche;
 			txtValor.setText("" + valor);
 		}		
+	}
+	
+	//limpiamos el valor al actualizar la fecha de la tabla
+	public void limpiarValor(){
+		txtValor.setText("");
 	}
 		
 	//Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	
