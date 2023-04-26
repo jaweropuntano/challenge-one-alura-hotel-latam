@@ -15,7 +15,7 @@ public class ConexionBase {
 		ComboPooledDataSource comboPool= new ComboPooledDataSource();
 		comboPool.setJdbcUrl("jdbc:mysql://localhost:3306/hotel_alura?useTimeZone=true&serverTimeZome=UTC");
 		comboPool.setUser("root");
-		comboPool.setPassword("jorge");
+		comboPool.setPassword("Leon211@");
 		comboPool.setMaxPoolSize(10);
 		
 		this.dataSou = comboPool;		

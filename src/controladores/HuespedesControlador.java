@@ -1,6 +1,7 @@
 package controladores;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,10 +25,12 @@ public class HuespedesControlador {
 		return this.huespedesDao.buscarId(id);
 	}
 	
-	public void actualizarH(String nombre, String apellido, LocalDate fechaNacimienhto, String nacionalidad,
+	public void actualizarH(String nombre, String apellido, Date fechaNacimienhto, String nacionalidad,
 			String telefono, Integer idReserva, Integer id) {
 		this.huespedesDao.ActualizarH(nombre, apellido, fechaNacimienhto, nacionalidad, telefono, idReserva, id);
+		
 	}
+	
 	public void Eliminar(Integer idReserva) {
 		this.huespedesDao.Eliminar(idReserva);
 	}

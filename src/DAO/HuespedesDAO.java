@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,10 +75,10 @@ public class HuespedesDAO {
 		}		
 	}
 	
-	public void ActualizarH(String nombre, String apellido, LocalDate fechaNacimienhto, String nacionalidad,
+	public void ActualizarH(String nombre, String apellido, Date fechaNacimienhto, String nacionalidad,
 			String telefono, Integer idReserva, Integer id) {
 		try(PreparedStatement stm= con.prepareStatement(""
-				+"UPDATE huspedes SET nombre=?, apellido=?, fecha_nacimiento=?, nacionalidad=?, "
+				+"UPDATE huespedes SET nombre=?, apellido=?, fecha_nacimiento=?, nacionalidad=?, "
 				+"telefono=?, id_reserva=? WHERE id=?")){
 			stm.setString(1, nombre);
 			stm.setString(2, apellido);

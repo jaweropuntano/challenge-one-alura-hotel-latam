@@ -396,11 +396,8 @@ public class Busqueda extends JFrame {
 			String telefono = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 5);
 			Integer id_reserva = Integer.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 6).toString());
 			
-			this.huespedControl.actualizarH(nombre, apellido, null, nacionalidad, telefono, id_reserva, id_reserva);
+			this.huespedControl.actualizarH(nombre, apellido, fechaNacimiento, nacionalidad, telefono, id_reserva, id_reserva);
 			JOptionPane.showMessageDialog(this, String.format("Registro modificado Correctamente"));
-
-
-
 			
 		}, ()->JOptionPane.showInternalMessageDialog(this, "ATENCION: Dato ingresado de Forma Incorrecta"));
 	}
