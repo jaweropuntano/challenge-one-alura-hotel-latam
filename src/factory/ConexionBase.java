@@ -20,7 +20,7 @@ public class ConexionBase {
 		
 		this.dataSou = comboPool;		
 	}
-	public Connection conectarBase() {
+	public Connection conectarBase(){
 		try {
 			return this.dataSou.getConnection();
 		} catch (SQLException e) {

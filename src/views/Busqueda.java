@@ -31,6 +31,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.sql.Date;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -269,9 +270,15 @@ public class Busqueda extends JFrame {
 		btnEditar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int filaReservas = tbReservas.getSelectedRow();
+				int filaHuespedes = tbHuespedes.getSelectedRow();
 				if(filaReservas >= 0) {
 					ActualizarReservas();
 					limpiarTabla();
+					mostrarTablaReservas();
+					mostrarHuespedes();
+				}else if(filaHuespedes >= 0) {
+					ActualizarHuespedes();
+					mostrarHuespedes();
 					mostrarTablaReservas();
 				}
 			}
@@ -293,6 +300,7 @@ public class Busqueda extends JFrame {
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int filaReservas = tbReservas.getSelectedRow();
+				int filaHuespedes = tbHuespedes.getSelectedRow();
 				
 				if(filaReservas >= 0) {
 					reserva = tbReservas.getValueAt(filaReservas, 0).toString();
@@ -304,6 +312,17 @@ public class Busqueda extends JFrame {
 						limpiarTabla();
 						mostrarTablaReservas();
 						mostrarHuespedes();
+					}
+				}else if(filaHuespedes >= 0){
+					huespedes = tbHuespedes.getValueAt(filaHuespedes, 0).toString();
+					int confirmarH = JOptionPane.showConfirmDialog(null, "Confirme si desea eliminar al Huesped");
+					if(confirmarH == JOptionPane.YES_OPTION) {
+						String valor = tbHuespedes.getValueAt(filaHuespedes, 0).toString();
+						huespedControl.Eliminar(Integer.valueOf(valor));
+						JOptionPane.showMessageDialog(contentPane, "Huesped Eliminado Correctamente");
+						limpiarTabla();
+						mostrarHuespedes();
+						mostrarTablaReservas();
 					}
 				}
 			}
@@ -365,6 +384,25 @@ public class Busqueda extends JFrame {
 		}catch (Exception e) {
 			throw e;
 		}		
+	}
+	
+	private void ActualizarHuespedes() {
+		Optional.ofNullable(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), tbHuespedes.getSelectedColumn()))
+		.ifPresentOrElse(filaHuespedes ->{
+			String nombre = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 1);
+			String apellido = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 2);
+			Date fechaNacimiento = Date.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 3).toString());
+			String nacionalidad = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 4);
+			String telefono = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 5);
+			Integer id_reserva = Integer.valueOf(modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 6).toString());
+			
+			this.huespedControl.actualizarH(nombre, apellido, null, nacionalidad, telefono, id_reserva, id_reserva);
+			JOptionPane.showMessageDialog(this, String.format("Registro modificado Correctamente"));
+
+
+
+			
+		}, ()->JOptionPane.showInternalMessageDialog(this, "ATENCION: Dato ingresado de Forma Incorrecta"));
 	}
 	
 		

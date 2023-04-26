@@ -74,6 +74,32 @@ public class HuespedesDAO {
 		}		
 	}
 	
+	public void ActualizarH(String nombre, String apellido, LocalDate fechaNacimienhto, String nacionalidad,
+			String telefono, Integer idReserva, Integer id) {
+		try(PreparedStatement stm= con.prepareStatement(""
+				+"UPDATE huspedes SET nombre=?, apellido=?, fecha_nacimiento=?, nacionalidad=?, "
+				+"telefono=?, id_reserva=? WHERE id=?")){
+			stm.setString(1, nombre);
+			stm.setString(2, apellido);
+			stm.setObject(3, fechaNacimienhto);
+			stm.setString(4, nacionalidad);
+			stm.setString(5, telefono);
+			stm.setInt(6, idReserva);
+			stm.setInt(7, id);
+			stm.execute();
+		}catch(SQLException e){
+			throw new RuntimeException(e);			
+		}		
+	}
+	
+	public void Eliminar(Integer id) {
+		try(PreparedStatement stm = con.prepareStatement("DELETE FROM huespedes WHERE id=?")){
+			stm.setInt(1, id);
+			stm.execute();			
+		}catch(SQLException e){
+			throw new RuntimeException(e);
+		}
+	}
 	
 	
 	

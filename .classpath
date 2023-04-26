@@ -6,15 +6,15 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/sanid/Downloads/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/sanid/Downloads/jcalendar-1.4/lib/jgoodies-common-1.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/sanid/Downloads/jcalendar-1.4/lib/jgoodies-looks-2.4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/sanid/Downloads/jcalendar-1.4/lib/junit-4.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/sanid/Downloads/c3p0-0.9.5.5.bin/c3p0-0.9.5.5/lib/c3p0-0.9.5.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/sanid/Downloads/c3p0-0.9.5.5.bin/c3p0-0.9.5.5/lib/c3p0-oracle-thin-extras-0.9.5.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/sanid/Downloads/c3p0-0.9.5.5.bin/c3p0-0.9.5.5/lib/mchange-commons-java-0.2.19.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Program Files/MySQL/Connector C++ 8.0/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar"/>
+	<classpathentry kind="lib" path="/home/linuxmint/Descargas/c3p0-0.9.5.5/lib/c3p0-0.9.5.5.jar"/>
+	<classpathentry kind="lib" path="/home/linuxmint/Descargas/c3p0-0.9.5.5/lib/c3p0-oracle-thin-extras-0.9.5.5.jar"/>
+	<classpathentry kind="lib" path="/home/linuxmint/Descargas/c3p0-0.9.5.5/lib/mchange-commons-java-0.2.19.jar"/>
+	<classpathentry kind="lib" path="/home/linuxmint/Descargas/jcalendar-1.4/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="/home/linuxmint/Descargas/jcalendar-1.4/lib/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="/home/linuxmint/Descargas/jcalendar-1.4/lib/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="/home/linuxmint/Descargas/jcalendar-1.4/lib/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="/home/linuxmint/Descargas/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
